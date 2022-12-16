@@ -10,3 +10,14 @@ test('button has correct initial color and updates when clicked', () => {
     expect(colorButton).toHaveStyle({backgroundColor: 'blue'});
     expect(colorButton).toHaveTextContent('Change to red');
 });
+
+test('checkbox can enable and disable button', () => {
+    render(<App />);
+    const colorButton = screen.getByRole('button', {name: 'Change to blue'});
+    const checkbox = screen.getByRole('checkbox');
+    expect(colorButton).toBeEnabled();
+    fireEvent.click(checkbox);
+    expect(colorButton).toBeDisabled();
+    fireEvent.click(checkbox);
+    expect(colorButton).toBeEnabled();
+});
