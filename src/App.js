@@ -3,19 +3,27 @@ import {useState} from 'react';
 import ColorButton from './components/ColorButton';
 import Checkbox from './components/Checkbox';
 
+const red = 'MediumVioletRed';
+const blue = 'MidnightBlue';
+const gray = 'gray';
+const checkboxLabel = 'Disable button';
+
 export function replaceCamelWithSpaces(colorName) {
     return colorName.replace(/\B([A-Z])\B/g, ' $1');
 }
 
 function App() {
-    const [buttonColor, setButtonColor] = useState('red');
-    const [buttonText, setButtonText] = useState('Change to blue');
+    const [buttonColor, setButtonColor] = useState(red);
+    const [buttonText, setButtonText] = useState('Change to ' + replaceCamelWithSpaces(blue));
     const [checked, setChecked] = useState(false);
     const [disabled, setDisabled] = useState(false);
 
     const clickHandler = () => {
-        const newButtonColor = buttonColor === 'red' ? 'blue' : 'red';
-        const newButtonText = buttonText === 'Change to blue' ? 'Change to red' : 'Change to blue';
+        const redLabel = 'Change to ' + replaceCamelWithSpaces(red);
+        const blueLabel = 'Change to ' + replaceCamelWithSpaces(blue);
+
+        const newButtonColor = buttonColor === red ? blue : red;
+        const newButtonText = buttonText === redLabel ? blueLabel : redLabel;
         setButtonColor(newButtonColor);
         setButtonText(newButtonText);
     }
@@ -26,7 +34,7 @@ function App() {
         setChecked(newChecked);
         setDisabled(newDisabled);
         if (newDisabled) {
-            setButtonColor('gray');
+            setButtonColor(gray);
         }
     }
 
@@ -39,9 +47,9 @@ function App() {
                 buttonText={buttonText}
             />
             <Checkbox
-                checkboxClickHandler={checkboxClickHandler}
                 checked={checked}
-                labelText='Disable button'
+                labelText={checkboxLabel}
+                onChange={checkboxClickHandler}
             />
         </div>
     );

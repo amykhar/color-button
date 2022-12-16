@@ -1,9 +1,9 @@
-export const Checkbox = ({checkboxClickHandler, checked, labelText}) => {
+export const Checkbox = ({checked, labelText, onChange}) => {
     return (
         <>
             <input
                 type='checkbox'
-                onClick={checkboxClickHandler}
+                onChange={onChange}
                 id={'disable-button-checkbox'}
                 checked={checked}
             />
