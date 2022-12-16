@@ -1,5 +1,11 @@
 import './App.css';
 import {useState} from 'react';
+import ColorButton from './components/ColorButton';
+import Checkbox from './components/Checkbox';
+
+export function replaceCamelWithSpaces(colorName) {
+    return colorName.replace(/\B([A-Z])\B/g, ' $1');
+}
 
 function App() {
     const [buttonColor, setButtonColor] = useState('red');
@@ -19,30 +25,24 @@ function App() {
         const newDisabled = !disabled;
         setChecked(newChecked);
         setDisabled(newDisabled);
+        if (newDisabled) {
+            setButtonColor('gray');
+        }
     }
 
     return (
         <div>
-            <button
-                style={
-                    {
-                        'backgroundColor': `${buttonColor}`,
-                        'color': 'white',
-                        'padding': '10px 20px',
-                    }
-                }
-                onClick={clickHandler}
+            <ColorButton
+                clickHandler={clickHandler}
                 disabled={disabled}
-            >
-                {buttonText}
-            </button>
-            <input
-                type='checkbox'
-                onClick={checkboxClickHandler}
-                id={'disable-button-checkbox'}
-                checked={checked}
+                buttonColor={buttonColor}
+                buttonText={buttonText}
             />
-            <label htmlFor='disable-button-checkbox'>Disable button</label>
+            <Checkbox
+                checkboxClickHandler={checkboxClickHandler}
+                checked={checked}
+                labelText='Disable button'
+            />
         </div>
     );
 }
