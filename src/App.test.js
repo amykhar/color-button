@@ -2,6 +2,7 @@ import {render, screen, fireEvent} from '@testing-library/react';
 
 import App from './App';
 import {replaceCamelWithSpaces} from './App';
+import {replaceSpacesWithCamel} from './App';
 
 describe('button behavior', () => {
     test('button has correct initial color and updates when clicked', () => {
@@ -31,6 +32,15 @@ describe('button behavior', () => {
         fireEvent.click(checkbox);
         expect(colorButton).toBeDisabled();
         expect(colorButton).toHaveStyle({backgroundColor: 'gray'});
+        fireEvent.click(checkbox);
+        expect(colorButton).toBeEnabled();
+        expect(colorButton).toHaveStyle({backgroundColor: 'MidnightBlue'});
+        fireEvent.click(colorButton);
+        expect(colorButton).toHaveStyle({backgroundColor: 'MediumVioletRed'});
+        fireEvent.click(checkbox);
+        expect(colorButton).toHaveStyle({backgroundColor: 'gray'});
+        fireEvent.click(checkbox);
+        expect(colorButton).toHaveStyle({backgroundColor: 'MediumVioletRed'});
     });
 });
 
@@ -49,5 +59,15 @@ describe('spaces before camel-case capital letters', () => {
 
     test('works for multiple inner capital letters', () => {
         expect(replaceCamelWithSpaces('MediumVioletRed')).toBe('Medium Violet Red');
+    });
+});
+
+describe('remove "Change to" from label and restore Camel Case', () => {
+    test('works for Midnight Blue', () => {
+        expect(replaceSpacesWithCamel('Change to Midnight Blue')).toBe('MidnightBlue');
+    });
+
+    test('works for Medium Violet Red', () => {
+        expect(replaceSpacesWithCamel('Change to Medium Violet Red')).toBe('MediumVioletRed');
     });
 });

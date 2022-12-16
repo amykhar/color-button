@@ -12,6 +12,12 @@ export function replaceCamelWithSpaces(colorName) {
     return colorName.replace(/\B([A-Z])\B/g, ' $1');
 }
 
+export function replaceSpacesWithCamel(colorName) {
+    colorName = colorName.replace('Change to ', '');
+    colorName = colorName.replace(/\s/g, '');
+    return colorName;
+}
+
 function App() {
     const [buttonColor, setButtonColor] = useState(red);
     const [buttonText, setButtonText] = useState('Change to ' + replaceCamelWithSpaces(blue));
@@ -35,6 +41,9 @@ function App() {
         setDisabled(newDisabled);
         if (newDisabled) {
             setButtonColor(gray);
+        } else {
+            console.log(buttonText);
+            setButtonColor(replaceSpacesWithCamel(buttonText));
         }
     }
 
