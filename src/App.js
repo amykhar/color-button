@@ -44,7 +44,6 @@ function App() {
     if (newDisabled) {
       setButtonColor(gray);
     } else {
-      console.log(buttonText);
       setButtonColor(replaceSpacesWithCamel(buttonText));
     }
   };
