@@ -39,8 +39,10 @@ function App() {
             <input
                 type='checkbox'
                 onClick={checkboxClickHandler}
+                id={'disable-button-checkbox'}
                 checked={checked}
             />
+            <label htmlFor='disable-button-checkbox'>Disable button</label>
         </div>
     );
 }
