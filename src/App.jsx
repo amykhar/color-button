@@ -1,7 +1,9 @@
 import "./App.css";
+
 import { useState } from "react";
-import ColorButton from "./components/ColorButton";
-import Checkbox from "./components/Checkbox";
+
+import { Checkbox } from "./components/Checkbox";
+import { ColorButton } from "./components/ColorButton";
 
 const red = "MediumVioletRed";
 const blue = "MidnightBlue";
@@ -13,22 +15,22 @@ export function replaceCamelWithSpaces(colorName) {
 }
 
 export function replaceSpacesWithCamel(colorName) {
-  colorName = colorName.replace("Change to ", "");
-  colorName = colorName.replace(/\s/g, "");
-  return colorName;
+  let colorNameCamel = colorName.replace("Change to ", "");
+  colorNameCamel = colorNameCamel.replace(/\s/g, "");
+  return colorNameCamel;
 }
 
 function App() {
   const [buttonColor, setButtonColor] = useState(red);
   const [buttonText, setButtonText] = useState(
-    "Change to " + replaceCamelWithSpaces(blue)
+    `Change to ${replaceCamelWithSpaces(blue)}`
   );
   const [checked, setChecked] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   const clickHandler = () => {
-    const redLabel = "Change to " + replaceCamelWithSpaces(red);
-    const blueLabel = "Change to " + replaceCamelWithSpaces(blue);
+    const redLabel = `Change to ${replaceCamelWithSpaces(red)}`;
+    const blueLabel = `Change to ${replaceCamelWithSpaces(blue)}`;
 
     const newButtonColor = buttonColor === red ? blue : red;
     const newButtonText = buttonText === redLabel ? blueLabel : redLabel;
